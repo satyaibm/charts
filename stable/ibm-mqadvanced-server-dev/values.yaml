@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # license must be set to "accept" to accept the terms of the IBM license
-license: "not accepted"
+license: "accept"
 
 image:
   # repository is the container repository to use, which must contain IBM MQ Advanced for Developers
@@ -41,9 +41,9 @@ dataPVC:
   # name sets part of the name for this Persistent Volume Claim
   name: "data"
   ## storageClassName is the name of the Storage Class to use, or an empty string for no Storage Class
-  storageClassName: ""
+  storageClassName: "ibmc-block-gold"
   ## size is the minimum size of the Persistent Volume
-  size: 2Gi
+  size: 20Gi
 
 # logPVC section specifies settings for the transaction logs Persistent Volume Claim, which is used for data in /mnt/mqm-log
 logPVC:
@@ -52,9 +52,9 @@ logPVC:
   # name sets part of the name for this Persistent Volume Claim
   name: "log"
   ## storageClassName is the name of the Storage Class to use, or an empty string for no Storage Class
-  storageClassName: ""
+  storageClassName: "ibmc-block-gold"
   ## size is the minimum size of the Persistent Volume
-  size: 2Gi
+  size: 20Gi
 
 # qmPVC section specifies settings for the queue manager data Persistent Volume Claim, which is used for data in /mnt/mqm-data
 qmPVC:
@@ -78,8 +78,8 @@ resources:
 security:
   # context section specifies additional security context settings for the pod
   context:
-    fsGroup:
-    supplementalGroups: []
+    fsGroup: 1010
+    supplementalGroups: [65534]
   # initVolumeAsRoot specifies whether or not storage provider requires root permissions to initialize
   initVolumeAsRoot: false
 
@@ -95,11 +95,11 @@ queueManager:
   dev:
     secret:
       # name is the secret that contains the 'admin' user password and optionally the 'app' user password to use for messaging
-      name:
+      name: mq-secret
       # adminPasswordKey is the secret key that contains the 'admin' user password
-      adminPasswordKey:
+      adminPasswordKey: adminPassword
       # appPasswordKey is the secret key that contains the 'app' user password
-      appPasswordKey:
+      appPasswordKey: appPassword
 
 # pki is used to supply certificates, that are stored in k8s secrets, for use with the webconsole and queue manager.
 # Must be supplied as an array of yaml objects in the following format:
