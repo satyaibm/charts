@@ -86,7 +86,7 @@ security:
 # queueManager section specifies settings for the MQ Queue Manager
 queueManager:
   # name allows you to specify the name to use for the queue manager.  Defaults to the Helm release name.
-  name:
+  name: "b2bi603"
   # multiInstance specifies whether to run in multi-instance mode with an active and standby queue manager
   multiInstance: false
   # The duration in seconds the Queue Manager needs to terminate gracefully, difference in time between SIGTERM and SIGKILL
@@ -95,11 +95,11 @@ queueManager:
   dev:
     secret:
       # name is the secret that contains the 'admin' user password and optionally the 'app' user password to use for messaging
-      name: mq-secret
+      name: "mq-secret"
       # adminPasswordKey is the secret key that contains the 'admin' user password
-      adminPasswordKey: adminPassword
+      adminPasswordKey: "adminPassword"
       # appPasswordKey is the secret key that contains the 'app' user password
-      appPasswordKey: appPassword
+      appPasswordKey: "appPassword"
 
 # pki is used to supply certificates, that are stored in k8s secrets, for use with the webconsole and queue manager.
 # Must be supplied as an array of yaml objects in the following format:
