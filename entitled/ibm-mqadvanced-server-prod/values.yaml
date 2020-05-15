@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # license must be set to "accept" to accept the terms of the IBM license
-license: "not accepted"
+license: "accept"
 
 image:
   # repository is the container repository to use, which must contain IBM MQ Advanced
@@ -89,7 +89,7 @@ security:
 # queueManager section specifies settings for the MQ Queue Manager
 queueManager:
   # name allows you to specify the name to use for the queue manager.  Defaults to the Helm release name.
-  name:
+  name: "b2bi603"
   # multiInstance specifies whether to run in multi-instance mode with an active and standby queue manager
   multiInstance: false
   # The duration in seconds the Queue Manager needs to terminate gracefully, difference in time between SIGTERM and SIGKILL
@@ -97,8 +97,8 @@ queueManager:
 # pki is used to supply certificates, that are stored in Kubernetes secrets, for use with the webconsole and queue manager.
 # Must be supplied as an array of yaml objects in the following format:
 # - name: <label to give certificate> (only for pki.keys)
-#   secret:
-#     secretName: <name of Kubernetes secret>
+#   secret: 
+#     secretName: jms-secret
 #     items:
 #       - <certificate files to import> (for example: tls.key, tls.crt, ca.crt)
 pki:
